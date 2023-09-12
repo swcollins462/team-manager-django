@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
+from .models import Player
 
 
 def home(request):
+    players = Player.objects.all()
     context = {
         'menu_item': 'home',
     }
@@ -24,7 +26,7 @@ def home(request):
                 request, 'There was an error logging in. Please try again.')
             return redirect('home')
     else:
-        return render(request, 'manager_app/home.html', context)
+        return render(request, 'manager_app/home.html', {**context, 'players': players})
 
 
 def logout_user(request):
