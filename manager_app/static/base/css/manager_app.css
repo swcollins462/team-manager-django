@@ -1,0 +1,12 @@
+.clickable {
+    cursor: pointer;
+}
+
+.card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-table {
+    padding: .5rem 2rem .5rem 0;
+}

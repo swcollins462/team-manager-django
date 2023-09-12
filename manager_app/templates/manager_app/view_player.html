@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="col-md-6 offset-md-3">
+        <h1>View Player</h1>
+
+        <div class="card ">
+            <div class="card-header">
+                {{ player.first_name }} {{ player.last_name }}
+            </div>
+            <div class="card-body">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th class="pe-4 py-1">Number</th>
+                            <td>{{ player.jersey_num }}</td>
+                        </tr>
+                        <tr>
+                            <th class="pe-4 py-1">Position</th>
+                            <td>{{ player.position }}</td>
+                        </tr>
+                        <tr>
+                            <th class="pe-4 py-1">Born</th>
+                            <td>{{ player.born }}</td>
+                        </tr>
+                        <tr>
+                            <th class="pe-4 py-1">Age</th>
+                            <td>{{ player.player_age }}</td>
+                        </tr>
+                        <tr>
+                            <th class="pe-4 py-1">Height</th>
+                            <td>{{ player.height_feet }}'{{ player.height_inches }}"</td>
+                        </tr>
+                        <tr>
+                            <th class="pe-4 py-1">Weight</th>
+                            <td>{{ player.weight }} lbs</td>
+                        </tr>
+                        <tr>
+                            <th class="pe-4 py-1">Date Added</th>
+                            <td>{{ player.date_added }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back</a>
+    </div>
+
+{% endblock %}

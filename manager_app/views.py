@@ -57,3 +57,13 @@ def register_user(request):
         return render(request, 'manager_app/register.html', {**context, 'form': form})
 
     return render(request, 'manager_app/register.html', {**context, 'form': form})
+
+
+def view_player(request, pk):
+    if request.user.is_authenticated:
+        player = Player.objects.get(id=pk)
+        return render(request, 'manager_app/view_player.html', {'player': player})
+    else:
+        messages.success(
+            request, 'You must be logged in to view player information')
+        return redirect('home')
