@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <h1>Update Player</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary my-2">Update</button>
+        <a href="{% url 'view_player' player.id %}" class="btn btn-secondary my-2 mx-1">Back</a>
+    </form>
+</div>
+
+{% endblock %}

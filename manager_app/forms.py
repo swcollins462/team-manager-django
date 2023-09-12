@@ -1,8 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from datetime import date
+from django.core.exceptions import ValidationError
 from .models import Player
-from django.db.models.fields import BLANK_CHOICE_DASH
 
 
 class SignUpForm(UserCreationForm):
@@ -38,6 +39,7 @@ class SignUpForm(UserCreationForm):
 
 
 FEET_CHOICES = [
+    ('', 'feet'),
     ('2', '2'),
     ('3', '3'),
     ('4', '4'),
@@ -47,6 +49,7 @@ FEET_CHOICES = [
 ]
 
 INCHES_CHOICES = [
+    ('', 'inches'),
     ('0', '0'),
     ('1', '1'),
     ('2', '2'),
@@ -62,23 +65,33 @@ INCHES_CHOICES = [
 ]
 
 
+def validate_student_age(birthdate):
+    today = date.today()
+    age = today.year - birthdate.year - \
+        ((today.month, today.day) < (birthdate.month, birthdate.day))
+    if 19 > age > 3:
+        return birthdate
+    else:
+        raise ValidationError('Age must be between 4 and 18')
+
+
 class AddPlayerForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(
         attrs={'placeholder': 'First Name', 'class': 'form-control'}), label='First Name')
     last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(
         attrs={'placeholder': 'Last Name', 'class': 'form-control'}), label='Last Name')
     jersey_num = forms.IntegerField(required=True, widget=forms.widgets.TextInput(
-        attrs={'placeholder': 'Jersey Number', 'class': 'form-control'}), label='Jersey Number')
+        attrs={'placeholder': 'Jersey Number', 'class': 'form-control'}), label='Number')
     position = forms.CharField(required=True, widget=forms.widgets.TextInput(
         attrs={'placeholder': 'Position', 'class': 'form-control'}), label='Position')
-    born = forms.DateField(required=True, widget=forms.DateInput(
-        attrs={'class': 'form-control'}), label='Date Born')
-    height_feet = forms.ChoiceField(required=True, choices=BLANK_CHOICE_DASH + FEET_CHOICES, widget=forms.widgets.Select(
+    born = forms.DateField(required=True, validators=[validate_student_age], widget=forms.DateInput(
+        attrs={'placeholder': 'Date Born', 'class': 'form-control'}), label='Date Born')
+    height_feet = forms.ChoiceField(required=True, choices=FEET_CHOICES, widget=forms.widgets.Select(
         attrs={'placeholder': 'feet', 'class': 'form-control'}), label='Height Feet')
-    height_inches = forms.ChoiceField(required=True, choices=BLANK_CHOICE_DASH + INCHES_CHOICES, widget=forms.widgets.Select(
+    height_inches = forms.ChoiceField(required=True, choices=INCHES_CHOICES, widget=forms.widgets.Select(
         attrs={'placeholder': 'inches', 'class': 'form-control'}), label='Height Inches')
-    weight = forms.CharField(required=True, widget=forms.widgets.TextInput(
-        attrs={'placeholder': 'Weight in Pounds', 'class': 'form-control'}), label='Weight in Pounds')
+    weight = forms.IntegerField(required=True, widget=forms.widgets.TextInput(
+        attrs={'placeholder': 'Weight in Pounds', 'class': 'form-control'}), label='Weight')
 
     class Meta:
         model = Player

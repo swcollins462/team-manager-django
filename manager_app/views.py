@@ -19,7 +19,7 @@ def home(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, 'You have been logged in!')
+            messages.success(request, 'You have been logged in')
             return redirect('home')
         else:
             messages.success(
@@ -65,7 +65,7 @@ def view_player(request, pk):
         return render(request, 'manager_app/view_player.html', {'player': player})
     else:
         messages.success(
-            request, 'You must be logged in to view player information')
+            request, 'You must be logged in to view player information.')
         return redirect('home')
 
 
@@ -76,7 +76,7 @@ def delete_player(request, pk):
         messages.success(request, 'Player deleted successfully')
         return redirect('home')
     else:
-        messages.success(request, 'You must be logged in to delete a player')
+        messages.success(request, 'You must be logged in to delete a player.')
         return redirect('home')
 
 
@@ -93,5 +93,18 @@ def add_player(request):
                 return redirect('home')
         return render(request, 'manager_app/add_player.html', {**context, 'form': form})
     else:
-        messages.success(request, 'You must be logged in to add players')
+        messages.success(request, 'You must be logged in to add players.')
         return redirect('home')
+
+
+def update_player(request, pk):
+    if request.user.is_authenticated:
+        player = Player.objects.get(id=pk)
+        form = AddPlayerForm(request.POST or None, instance=player)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Player has been updated.')
+            return redirect('home')
+        return render(request, 'manager_app/update.html', {'form': form, 'player': player})
+    else:
+        messages.success(request, 'You must be logged in to update players.')
