@@ -22,20 +22,21 @@
             <tbody>
                 {% if players %}
                     {% for player in players %}
-                        <tr class="clickable" onclick="window.location='{% url 'view_player' player.id %}'">
+                        <tr class="clickable" onclick="location.href='{% url 'view_player' player.id %}'">
                             <td>{{ player.first_name }} {{ player.last_name }}</td>
                             <td>{{ player.jersey_num }}</td>
                             <td>{{ player.position }}</td>
                             <td>{{ player.born }}</td>
                             <td>{{ player.player_age }}</td>
                             <td>{{ player.height_feet }}'{{ player.height_inches }}"</td>
-                            <td>{{ player.weight }}</td>
+                            <td>{{ player.weight }} lbs</td>
                             <td>{{ player.date_added }}</td>
                         </tr>
                     {% endfor %}
                 {% endif %}
         </tbody>
     </table>
+    <a href="{% url 'add_player' %}" class="btn btn-primary">Add Player</a>
 </div>
 
 {% else %}
