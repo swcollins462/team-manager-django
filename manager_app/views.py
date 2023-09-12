@@ -67,3 +67,14 @@ def view_player(request, pk):
         messages.success(
             request, 'You must be logged in to view player information')
         return redirect('home')
+
+
+def delete_player(request, pk):
+    if request.user.is_authenticated:
+        deleted = Player.objects.get(id=pk)
+        deleted.delete()
+        messages.success(request, 'Player deleted successfully')
+        return redirect('home')
+    else:
+        messages.success(request, 'You must be logged to delete a player')
+        return redirect('home')

@@ -43,7 +43,8 @@
                 </table>
             </div>
         </div>
-        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary my-3">Back</a>
+        <a href="{% url 'delete_player' player.id %}" class="btn btn-danger my-3 mx-1">Delete</a>
     </div>
 
 {% endblock %}
