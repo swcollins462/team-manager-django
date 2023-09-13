@@ -9,31 +9,31 @@
     <table class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Number</th>
-                <th scope="col">Position</th>
-                <th scope="col">Born</th>
-                <th scope="col">Age</th>
-                <th scope="col">Height</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Date Added</th>
+                <th scope="col" class="home">Name</th>
+                <th scope="col" class="home">Number</th>
+                <th scope="col" class="home">Position</th>
+                <th scope="col" class="home">Born</th>
+                <th scope="col" class="home">Age</th>
+                <th scope="col" class="home">Height</th>
+                <th scope="col" class="home">Weight</th>
+                <th scope="col" class="home">Date Added</th>
             </tr>
-            </thead>
-            <tbody>
-                {% if players %}
-                    {% for player in players %}
-                        <tr class="clickable" onclick="location.href='{% url 'view_player' player.id %}'">
-                            <td>{{ player.first_name }} {{ player.last_name }}</td>
-                            <td>{{ player.jersey_num }}</td>
-                            <td>{{ player.position }}</td>
-                            <td>{{ player.born }}</td>
-                            <td>{{ player.player_age }}</td>
-                            <td>{{ player.height_feet }}'{{ player.height_inches }}"</td>
-                            <td>{{ player.weight }} lbs</td>
-                            <td>{{ player.date_added }}</td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
+        </thead>
+        <tbody>
+            {% if players %}
+                {% for player in players %}
+                    <tr class="clickable" onclick="location.href='{% url 'view_player' player.id %}'">
+                        <td data-cell="name" class="home">{{ player.first_name }} {{ player.last_name }}</td>
+                        <td data-cell="number" class="home">{{ player.jersey_num }}</td>
+                        <td data-cell="position" class="home">{{ player.position }}</td>
+                        <td data-cell="born" class="home">{{ player.born }}</td>
+                        <td data-cell="age" class="home">{{ player.player_age }}</td>
+                        <td data-cell="height" class="home">{{ player.height_feet }}'{{ player.height_inches }}"</td>
+                        <td data-cell="weight" class="home">{{ player.weight }} lbs</td>
+                        <td data-cell="date added" class="home">{{ player.date_added }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
     </table>
     <a href="{% url 'add_player' %}" class="btn btn-primary">Add Player</a>

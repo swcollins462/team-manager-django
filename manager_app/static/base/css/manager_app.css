@@ -1,3 +1,7 @@
+body {
+    min-width: 342px;
+}
+
 .clickable {
     cursor: pointer;
 }
@@ -5,4 +9,31 @@
 .card-header {
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    th.home {
+        display: none;
+    }
+
+    td.home {
+        display: grid;
+        gap: 0.3rem;
+        grid-template-columns: 10ch auto;
+        padding: 0.5rem 1rem;
+    }
+
+    td:first-child {
+        padding-top: 1.5rem;
+    }
+
+    td:last-child {
+        padding-bottom: 1.5rem;
+    }
+
+    td.home::before {
+        content: attr(data-cell) ': ';
+        font-weight: bold;
+        text-transform: capitalize;
+    }
 }
