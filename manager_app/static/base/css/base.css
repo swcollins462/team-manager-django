@@ -1,5 +1,6 @@
 body {
     min-width: 342px;
+    margin-bottom: 2rem;
 }
 
 .clickable {
@@ -9,6 +10,10 @@ body {
 .card-header {
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+.form-select {
+    width: fit-content;
 }
 
 @media screen and (max-width: 768px) {
@@ -23,11 +28,11 @@ body {
         padding: 0.5rem 1rem;
     }
 
-    td:first-child {
+    td.home:first-child {
         padding-top: 1.5rem;
     }
 
-    td:last-child {
+    td.home:last-child {
         padding-bottom: 1.5rem;
     }
 

@@ -10,7 +10,7 @@
         rel="stylesheet" 
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
         crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'base/css/manager_app.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
     <title>Team Manager</title>
 </head>
 <body>
@@ -38,7 +38,7 @@
                             </a>
                             <a 
                                 class="nav-link {% if menu_item == 'add_player' %}active{% endif %}" 
-                                href="{% url 'add_player' %}">
+                                href="{% url 'add' %}">
                                 Add Player
                             </a>
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>

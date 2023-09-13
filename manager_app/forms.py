@@ -75,22 +75,29 @@ def validate_student_age(birthdate):
         raise ValidationError('Age must be between 4 and 18')
 
 
+def validate_non_negative(num):
+    if num >= 0:
+        return num
+    else:
+        raise ValidationError('Number cannot be negative')
+
+
 class AddPlayerForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(
         attrs={'placeholder': 'First Name', 'class': 'form-control'}), label='First Name')
     last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(
         attrs={'placeholder': 'Last Name', 'class': 'form-control'}), label='Last Name')
-    jersey_num = forms.IntegerField(required=True, widget=forms.widgets.TextInput(
+    jersey_num = forms.IntegerField(required=True, validators=[validate_non_negative], widget=forms.widgets.TextInput(
         attrs={'placeholder': 'Jersey Number', 'class': 'form-control'}), label='Number')
     position = forms.CharField(required=True, widget=forms.widgets.TextInput(
         attrs={'placeholder': 'Position', 'class': 'form-control'}), label='Position')
     born = forms.DateField(required=True, validators=[validate_student_age], widget=forms.DateInput(
         attrs={'placeholder': 'Date Born', 'class': 'form-control'}), label='Date Born')
     height_feet = forms.ChoiceField(required=True, choices=FEET_CHOICES, widget=forms.widgets.Select(
-        attrs={'placeholder': 'feet', 'class': 'form-control'}), label='Height Feet')
+        attrs={'placeholder': 'feet', 'class': 'form-select'}), label='Height Feet')
     height_inches = forms.ChoiceField(required=True, choices=INCHES_CHOICES, widget=forms.widgets.Select(
-        attrs={'placeholder': 'inches', 'class': 'form-control'}), label='Height Inches')
-    weight = forms.IntegerField(required=True, widget=forms.widgets.TextInput(
+        attrs={'placeholder': 'inches', 'class': 'form-select'}), label='Height Inches')
+    weight = forms.IntegerField(required=True, validators=[validate_non_negative], widget=forms.widgets.TextInput(
         attrs={'placeholder': 'Weight in Pounds', 'class': 'form-control'}), label='Weight')
 
     class Meta:

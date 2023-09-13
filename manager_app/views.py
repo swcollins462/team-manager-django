@@ -62,7 +62,7 @@ def register_user(request):
 def view_player(request, pk):
     if request.user.is_authenticated:
         player = Player.objects.get(id=pk)
-        return render(request, 'manager_app/view_player.html', {'player': player})
+        return render(request, 'manager_app/player.html', {'player': player})
     else:
         messages.success(
             request, 'You must be logged in to view player information.')
@@ -91,7 +91,7 @@ def add_player(request):
                 add_player = form.save()
                 messages.success(request, 'Player added successfully')
                 return redirect('home')
-        return render(request, 'manager_app/add_player.html', {**context, 'form': form})
+        return render(request, 'manager_app/add.html', {**context, 'form': form})
     else:
         messages.success(request, 'You must be logged in to add players.')
         return redirect('home')
