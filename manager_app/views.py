@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import SignUpForm, AddPlayerForm
 from .models import Player
 
 
 def home(request):
-    players = Player.objects.all()
+    current_user = request.user
+    players = Player.objects.filter(user=current_user.id)
     context = {
         'menu_item': 'home',
     }
@@ -37,7 +39,6 @@ def logout_user(request):
 
 def register_user(request):
     context = {
-        'page': 'Register',
         'menu_item': 'register',
     }
     if request.method == 'POST':
@@ -88,9 +89,13 @@ def add_player(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             if form.is_valid():
-                add_player = form.save()
+                add_player = form.save(commit=False)
+                add_player.user = User.objects.get(pk=request.user.id)
+                add_player.save()
                 messages.success(request, 'Player added successfully')
                 return redirect('home')
+            else:
+                messages.success(request, 'Error on submit')
         return render(request, 'manager_app/add.html', {**context, 'form': form})
     else:
         messages.success(request, 'You must be logged in to add players.')

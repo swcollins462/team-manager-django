@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from datetime import date
 
@@ -12,6 +13,7 @@ class Player(models.Model):
     height_inches = models.PositiveIntegerField()
     weight = models.CharField(max_length=3)
     date_added = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

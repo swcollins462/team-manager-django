@@ -3,6 +3,10 @@ body {
     margin-bottom: 2rem;
 }
 
+.space-between {
+    justify-content: space-between;
+}
+
 .clickable {
     cursor: pointer;
 }
