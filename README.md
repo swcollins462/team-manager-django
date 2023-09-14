@@ -2,7 +2,7 @@
 
 Project by Stephen Collins
 
-Hosting link:
+Hosting link: http://stephencollins.pythonanywhere.com/
 
 Team Manager is a responsive web app for youth sports teams. It allows users to organize a team roster and store it in the cloud where it can be accessed from multiple devices. A new user can register for an account after providing a name and email address, then create a personal list of players. Functionality includes viewing a list of players, viewing players individually, adding new players, updating existing players, and deleting players.
 
