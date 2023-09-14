@@ -4,7 +4,7 @@
 
 {% if user.is_authenticated %}
 
-<div class="d-flex align-items-baseline space-between">
+<div class="home-heading">
     <h1>Team Manager</h1>
     <p>Logged in as {{ user.first_name }} {{ user.last_name }}</p>
 </div>
@@ -26,18 +26,20 @@
     </thead>
     <tbody>
             {% for player in players %}
-                <tr class="clickable" onclick="location.href='{% url 'player' player.id %}'">
-                    <td data-cell="name" class="home">{{ player.first_name }} {{ player.last_name }}</td>
-                    <td data-cell="number" class="home">{{ player.jersey_num }}</td>
-                    <td data-cell="position" class="home">{{ player.position }}</td>
-                    <td data-cell="born" class="home">{{ player.born }}</td>
-                    <td data-cell="age" class="home">{{ player.player_age }}</td>
-                    <td data-cell="height" class="home">{{ player.height_feet }}'{{ player.height_inches }}"</td>
-                    <td data-cell="weight" class="home">{{ player.weight }} lbs</td>
-                    <td data-cell="date added" class="home">{{ player.date_added }}</td>
-                </tr>
-            {% endfor %}
 
+            <tr class="clickable" onclick="location.href='{% url 'player' player.id %}'">
+                <td data-cell="name" class="home">{{ player.first_name }} {{ player.last_name }}</td>
+                <td data-cell="number" class="home">{{ player.jersey_num }}</td>
+                <td data-cell="position" class="home">{{ player.position }}</td>
+                <td data-cell="born" class="home">{{ player.born }}</td>
+                <td data-cell="age" class="home">{{ player.player_age }}</td>
+                <td data-cell="height" class="home">{{ player.height_feet }}'{{ player.height_inches }}"</td>
+                <td data-cell="weight" class="home">{{ player.weight }} lbs</td>
+                <td data-cell="date added" class="home">{{ player.date_added }}</td>
+            </tr>
+
+            {% endfor %}
+            
     </tbody>
 </table>
 
@@ -47,7 +49,7 @@
 
 {% else %}
 
-<div class="col-md-6 offset-md-3">
+<div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <h1>Login</h1>
     <form method="POST" action="{% url 'home' %}" class="mt-4">
         {% csrf_token %}

@@ -3,7 +3,9 @@ body {
     margin-bottom: 2rem;
 }
 
-.space-between {
+.home-heading {
+    display: flex;
+    align-items: baseline;
     justify-content: space-between;
 }
 
@@ -21,6 +23,10 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+    .home-heading {
+        flex-direction: column;
+    }
+
     th.home {
         display: none;
     }

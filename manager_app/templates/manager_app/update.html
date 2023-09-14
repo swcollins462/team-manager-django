@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xxl-6 offset-xxl-3">
+
+<div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
     <h1>Update Player</h1>
     <form method="POST">
         {% csrf_token %}
@@ -35,7 +36,7 @@
             {{ form.height_feet.errors }}
             {{ form.height_inches.errors }}
             <label for="{{ form.height_feet.id_for_label }}">Height:</label>
-            {{ form.height_feet }}{{ form.height_inches }}
+            {{ form.height_feet }} {{ form.height_inches }}
         </div>
         <div class="fieldWrapper mb-3">
             {{ form.weight.errors }}

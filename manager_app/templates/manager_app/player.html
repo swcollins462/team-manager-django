@@ -1,72 +1,71 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xxl-6 offset-xxl-3">
-        <h1>View Player</h1>
-
-        <div class="card ">
-            <div class="card-header">
-                {{ player.first_name }} {{ player.last_name }}
-            </div>
-            <div class="card-body">
-                <table>
-                    <tbody>
-                        <tr>
-                            <th class="pe-4 py-1">Number</th>
-                            <td>{{ player.jersey_num }}</td>
-                        </tr>
-                        <tr>
-                            <th class="pe-4 py-1">Position</th>
-                            <td>{{ player.position }}</td>
-                        </tr>
-                        <tr>
-                            <th class="pe-4 py-1">Born</th>
-                            <td>{{ player.born }}</td>
-                        </tr>
-                        <tr>
-                            <th class="pe-4 py-1">Age</th>
-                            <td>{{ player.player_age }}</td>
-                        </tr>
-                        <tr>
-                            <th class="pe-4 py-1">Height</th>
-                            <td>{{ player.height_feet }}'{{ player.height_inches }}"</td>
-                        </tr>
-                        <tr>
-                            <th class="pe-4 py-1">Weight</th>
-                            <td>{{ player.weight }} lbs</td>
-                        </tr>
-                        <tr>
-                            <th class="pe-4 py-1">Date Added</th>
-                            <td>{{ player.date_added }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+    <h1>View Player</h1>
+    <div class="card ">
+        <div class="card-header">
+            {{ player.first_name }} {{ player.last_name }}
         </div>
-        <a href="{% url 'home' %}" class="btn btn-secondary my-3">Back</a>
-        <a href="{% url 'update' player.id %}" class="btn btn-success my-3 ms-1">Update</a>
-        <button type="button" class="btn btn-danger ms-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Delete
-        </button>
+        <div class="card-body">
+            <table>
+                <tbody>
+                    <tr>
+                        <th class="pe-4 py-1">Number</th>
+                        <td>{{ player.jersey_num }}</td>
+                    </tr>
+                    <tr>
+                        <th class="pe-4 py-1">Position</th>
+                        <td>{{ player.position }}</td>
+                    </tr>
+                    <tr>
+                        <th class="pe-4 py-1">Born</th>
+                        <td>{{ player.born }}</td>
+                    </tr>
+                    <tr>
+                        <th class="pe-4 py-1">Age</th>
+                        <td>{{ player.player_age }}</td>
+                    </tr>
+                    <tr>
+                        <th class="pe-4 py-1">Height</th>
+                        <td>{{ player.height_feet }}'{{ player.height_inches }}"</td>
+                    </tr>
+                    <tr>
+                        <th class="pe-4 py-1">Weight</th>
+                        <td>{{ player.weight }} lbs</td>
+                    </tr>
+                    <tr>
+                        <th class="pe-4 py-1">Date Added</th>
+                        <td>{{ player.date_added }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <a href="{% url 'home' %}" class="btn btn-secondary my-3">Back</a>
+    <a href="{% url 'update' player.id %}" class="btn btn-success my-3 ms-1">Update</a>
+    <button type="button" class="btn btn-danger ms-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Delete
+    </button>
+</div>
 
-    <!-- Modal window -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Are you sure?</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    This player will be deleted permanently. Are you sure?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                    <a type="button" href="{% url 'delete' player.id %}" class="btn btn-danger">Delete</a>
-                </div>
+<!-- Modal window -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Are you sure?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                This player will be deleted permanently. Are you sure?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                <a type="button" href="{% url 'delete' player.id %}" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

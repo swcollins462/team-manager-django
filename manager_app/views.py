@@ -17,11 +17,12 @@ def home(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+
         # Authenticate
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, 'You have been logged in')
+            messages.success(request, 'You have been logged in.')
             return redirect('home')
         else:
             messages.success(
@@ -41,10 +42,12 @@ def register_user(request):
     context = {
         'menu_item': 'register',
     }
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
+
             # Authenticate and login
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
@@ -85,6 +88,7 @@ def add_player(request):
     context = {
         'menu_item': 'add_player'
     }
+
     form = AddPlayerForm(request.POST or None)
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -94,8 +98,6 @@ def add_player(request):
                 add_player.save()
                 messages.success(request, 'Player added successfully')
                 return redirect('home')
-            else:
-                messages.success(request, 'Error on submit')
         return render(request, 'manager_app/add.html', {**context, 'form': form})
     else:
         messages.success(request, 'You must be logged in to add players.')

@@ -82,6 +82,13 @@ def validate_non_negative(num):
         raise ValidationError('Number cannot be negative')
 
 
+def validate_weight(num):
+    if 25 < num < 500:
+        return num
+    else:
+        raise ValidationError('Weight is invalid')
+
+
 class AddPlayerForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(
         attrs={'placeholder': 'First Name', 'class': 'form-control'}), label='First Name')
@@ -92,12 +99,12 @@ class AddPlayerForm(forms.ModelForm):
     position = forms.CharField(required=True, widget=forms.widgets.TextInput(
         attrs={'placeholder': 'Position', 'class': 'form-control'}), label='Position')
     born = forms.DateField(required=True, validators=[validate_student_age], widget=forms.DateInput(
-        attrs={'placeholder': 'Date Born', 'class': 'form-control'}), label='Date Born')
+        attrs={'placeholder': 'YYYY-MM-DD', 'class': 'form-control'}), label='Date Born')
     height_feet = forms.ChoiceField(required=True, choices=FEET_CHOICES, widget=forms.widgets.Select(
         attrs={'placeholder': 'feet', 'class': 'form-select'}), label='Height Feet')
     height_inches = forms.ChoiceField(required=True, choices=INCHES_CHOICES, widget=forms.widgets.Select(
         attrs={'placeholder': 'inches', 'class': 'form-select'}), label='Height Inches')
-    weight = forms.IntegerField(required=True, validators=[validate_non_negative], widget=forms.widgets.TextInput(
+    weight = forms.IntegerField(required=True, validators=[validate_weight], widget=forms.widgets.TextInput(
         attrs={'placeholder': 'Weight in Pounds', 'class': 'form-control'}), label='Weight')
 
     class Meta:

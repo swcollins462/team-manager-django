@@ -20,7 +20,9 @@ class Player(models.Model):
 
     def calculate_age(self, born):
         today = date.today()
-        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+        age = today.year - born.year - \
+            ((today.month, today.day) < (born.month, born.day))
+        return age
 
     @property
     def player_age(self):
