@@ -11,6 +11,7 @@ def home(request):
     players = Player.objects.filter(user=current_user.id)
     context = {
         'menu_item': 'home',
+        'players': players,
     }
 
     # Check to see if logging in
@@ -29,7 +30,7 @@ def home(request):
                 request, 'There was an error logging in. Please try again.')
             return redirect('home')
     else:
-        return render(request, 'manager_app/home.html', {**context, 'players': players})
+        return render(request, 'manager_app/home.html', context)
 
 
 def logout_user(request):
@@ -85,11 +86,12 @@ def delete_player(request, pk):
 
 
 def add_player(request):
+    form = AddPlayerForm(request.POST or None)
     context = {
-        'menu_item': 'add_player'
+        'menu_item': 'add_player',
+        'form': form,
     }
 
-    form = AddPlayerForm(request.POST or None)
     if request.user.is_authenticated:
         if request.method == "POST":
             if form.is_valid():
@@ -98,20 +100,25 @@ def add_player(request):
                 add_player.save()
                 messages.success(request, 'Player added successfully')
                 return redirect('home')
-        return render(request, 'manager_app/add.html', {**context, 'form': form})
+        return render(request, 'manager_app/add.html', context)
     else:
         messages.success(request, 'You must be logged in to add players.')
         return redirect('home')
 
 
 def update_player(request, pk):
+    player = Player.objects.get(id=pk)
+    form = AddPlayerForm(request.POST or None, instance=player)
+    context = {
+        'player': player,
+        'form': form,
+    }
+
     if request.user.is_authenticated:
-        player = Player.objects.get(id=pk)
-        form = AddPlayerForm(request.POST or None, instance=player)
         if form.is_valid():
             form.save()
             messages.success(request, 'Player has been updated.')
             return redirect('home')
-        return render(request, 'manager_app/update.html', {'form': form, 'player': player})
+        return render(request, 'manager_app/update.html', context)
     else:
         messages.success(request, 'You must be logged in to update players.')
