@@ -61,8 +61,6 @@ def register_user(request):
         form = SignUpForm()
         return render(request, 'manager_app/register.html', {**context, 'form': form})
 
-    return render(request, 'manager_app/register.html', {**context, 'form': form})
-
 
 def view_player(request, pk):
     if request.user.is_authenticated:
