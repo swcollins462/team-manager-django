@@ -66,7 +66,7 @@ def register_user(request):
 def view_player(request, pk):
     if request.user.is_authenticated:
         player = Player.objects.get(id=pk)
-        return render(request, 'manager_app/player.html', {'player': player})
+        return render(request, 'manager_app/view.html', {'player': player})
     else:
         messages.success(
             request, 'You must be logged in to view player information.')

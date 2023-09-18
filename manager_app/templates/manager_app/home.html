@@ -27,7 +27,7 @@
     <tbody>
             {% for player in players %}
 
-            <tr class="clickable" onclick="location.href='{% url 'player' player.id %}'">
+            <tr class="clickable" onclick="location.href='{% url 'view' player.id %}'">
                 <td data-cell="name" class="home">{{ player.first_name }} {{ player.last_name }}</td>
                 <td data-cell="number" class="home">{{ player.jersey_num }}</td>
                 <td data-cell="position" class="home">{{ player.position }}</td>
